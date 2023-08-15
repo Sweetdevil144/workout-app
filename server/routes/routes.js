@@ -1,39 +1,29 @@
 const express = require("express");
 const Model = require("../models/model");
-const { createWorkout } = require("../controllers/controller");
+const {
+  getWorkouts,
+  getWorkout,
+  createWorkout,
+  deleteWorkout,
+  updateWorkout,
+} = require("../controllers/controller");
 require("dotenv").config();
 
-const routes = express.Router();
+const router = express.Router();
 
 // Get all workout
-routes.get("/", (req, res) => {
-  res.json({
-    message: "Get all workout",
-  });
-});
+router.get("/", getWorkouts);
 
 // Get a single workout.
-routes.get("/:id", (req, res) => {
-  res.json({
-    message: "Get single workout",
-  });
-});
+router.get("/:id", getWorkout);
 
-// Post a new workout
-routes.post("/", async (req, res) => {});
+// Create a new workout
+router.post("/", createWorkout);
 
 // Delete a workout
-routes.delete("/:id", (req, res) => {
-  res.json({
-    message: "Delete a workout",
-  });
-});
+router.delete("/:id", deleteWorkout);
 
 // Update a workout
-routes.post("/:id", (req, res) => {
-  res.json({
-    message: "Update a new workout",
-  });
-});
+router.patch("/:id", updateWorkout);
 
-module.exports = routes;
+module.exports = router;
